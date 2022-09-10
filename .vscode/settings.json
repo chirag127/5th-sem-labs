@@ -1,5 +1,10 @@
 {
     "files.associations": {
         "string.h": "c"
-    }
+    },
+    "java.project.sourcePaths": [
+        "daa/11. Sort a given set of n integer elements using Quick Sort method and compute its time complexity. Run the program for"
+    ],
+    "editor.tabCompletion": "on",
+    "diffEditor.codeLens": true
 }
