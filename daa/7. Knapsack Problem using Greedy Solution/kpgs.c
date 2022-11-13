@@ -4,11 +4,8 @@
 
 int main()
 {
-    int  n, i, j, temp, m, p[100], w[100], x[100], tp = 0, tw = 0;
+    int  n, i, j, t, m, p[100], w[100], x[100], tp = 0, tw = 0;
     float  u;
-
-    printf("This is the program for the knapsack problem using greedy solution in c \n written by Chirag Singhal \n roll number 2000330100084 \n");
-
     printf( "Enter the number of objects : " );
     scanf( "%d" , &n);
     printf( "Enter the weights and profits of each object : " );
@@ -22,12 +19,12 @@ int main()
         for (j = i + 1; j < n; j++)
             if (p[i] < p[j])
             {
-                temp = p[i];
+                t = p[i];
                 p[i] = p[j];
-                p[j] = temp;
-                temp = w[i];
+                p[j] = t;
+                t = w[i];
                 w[i] = w[j];
-                w[j] = temp;
+                w[j] = t;
             }
     u = m;
     for (i = 0; i < n; i++)

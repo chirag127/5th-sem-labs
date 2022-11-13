@@ -2,33 +2,68 @@
 
 #include<stdio.h>
 
-int main()
+void merge(int a[], int low, int mid, int high)
 {
-    int  a[100], n, i, j, temp;
-
-    printf("This is the program for the merge sort in c \n written by Chirag Singhal \n roll number 2000330100084 \n");
-
-    printf( "Enter the number of elements : " );
-    scanf( "%d" , &n);
-    printf( "Enter the elements : " );
-    for (i = 0; i < n; i++)
-        scanf( "%d" , &a[i]);
-    for (i = 0; i < n; i++)
+    int i, j, k, c[50];
+    i = low;
+    k = low;
+    j = mid + 1;
+    while (i <= mid && j <= high)
     {
-        for (j = 0; j < n - i - 1; j++)
+        if (a[i] < a[j])
         {
-            if (a[j] > a[j + 1])
-            {
-                temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
+            c[k] = a[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            c[k] = a[j];
+            k++;
+            j++;
         }
     }
-    printf( "Sorted array is : " );
-    for (i = 0; i < n; i++)
-        printf( "%d " , a[i]);
+    while (i <= mid)
+    {
+        c[k] = a[i];
+        k++;
+        i++;
+    }
+    while (j <= high)
+    {
+        c[k] = a[j];
+        k++;
+        j++;
+    }
+    for (i = low; i < k; i++)
+    {
+        a[i] = c[i];
+    }
+}
 
-    printf("\n");
-    return  0;
+void merge_sort(int a[], int low, int high)
+{
+    int mid;
+    if (low < high)
+    {
+        mid = (low + high) / 2;
+        merge_sort(a, low, mid);
+        merge_sort(a, mid + 1, high);
+        merge(a, low, mid, high);
+    }
+}
+
+int main()
+{
+    int a[30], n, i;
+    printf("Enter the number of elements : ");
+    scanf("%d", &n);
+    printf("Enter the elements : ");
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+    merge_sort(a, 0, n - 1);
+    printf("Sorted array is : ");
+    for (i = 0; i < n; i++)
+        printf(" %d", a[i]);
+    return 0;
 }

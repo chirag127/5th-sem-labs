@@ -1,34 +1,36 @@
 // write a `program for the insertion sort in c`
+#include <stdio.h>
 
-#include<stdio.h>
+void is(int a[], int n) /* function to sort an aay with insertion sort */
+{
+    int i, j, t;
+    for (i = 1; i < n; i++) {
+        t = a[i];
+        j = i - 1;
+
+        while(j>=0 && t <= a[j])  /* Move the elements greater than t to one position ahead from their current position*/
+        {
+            a[j+1] = a[j];
+            j = j-1;
+        }
+        a[j+1] = t;
+    }
+}
+
+void pa(int a[], int n) /* function to print the array */
+{
+    int i;
+    for (i = 0; i < n; i++)
+        printf("%d ", a[i]);
+}
 
 int main()
 {
-    int  a[100], n, i, j, temp;
+    int a[] = { 12, 31, 25, 8, 32, 17 };
+    int n = sizeof(a) / sizeof(a[0]);
+    is(a, n);
+    printf("\nAfter sorting array elements are - \n");
+    pa(a, n);
 
-    printf("This is the program for the insertion sort in c \nwritten by Chirag Singhal \nroll number 2000330100084 \n");
-
-    printf( "Enter the number of elements : " );
-    scanf( "%d" , &n);
-    printf( "Enter the elements : " );
-    for (i = 0; i < n; i++)
-        scanf( "%d" , &a[i]);
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n - i - 1; j++)
-        {
-            if (a[j] > a[j + 1])
-            {
-                temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-        }
-    }
-    printf( "Sorted array is : " );
-    for (i = 0; i < n; i++)
-        printf( "%d " , a[i]);
-
-    printf("\n");
-    return  0;
+    return 0;
 }

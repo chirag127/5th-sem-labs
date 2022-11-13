@@ -37,16 +37,21 @@ int main()
         scanf("%d", &a[i]);
     printf("Enter the key : ");
     scanf("%d", &key);
-    
-    pos = binary_search(a, 0, n - 1, key);
+
+    printf("enter search type 1 for binary search and 2 for linear search : ");
+    scanf("%d", &i);
+
+    if (i == 1)
+        pos = binary_search(a, 0, n - 1, key);
+    else
+        pos = linear_search(a, n, key);
+
     if (pos == -1)
         printf("Key not found");
+
     else
-        printf("Key found at position %d", pos + 1);
-    pos = linear_search(a, n, key);
-    if (pos == -1)
-        printf("Key not found");
-    else
+
         printf("Key found at position %d", pos + 1);
     return 0;
+
 }

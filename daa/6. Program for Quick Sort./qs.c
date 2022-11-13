@@ -1,35 +1,43 @@
 // Write a program to implement Quick Sort.
+// Quick sort in C
 
-#include<stdio.h>
-
-int main()
-{
-    int  a[100], n, i, j, temp;
-
-    printf("This is the program for the quick sort in c \n written by Chirag Singhal \n roll number 2000330100084 \n");
-
-    printf( "Enter the number of elements : " );
-    scanf( "%d" , &n);
-    printf( "Enter the elements : " );
-    for (i = 0; i < n; i++)
-        scanf( "%d" , &a[i]);
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n - i - 1; j++)
-        {
-            if (a[j] > a[j + 1])
-            {
-                temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-        }
-    }
-    printf( "Sorted array is : " );
-    for (i = 0; i < n; i++)
-        printf( "%d " , a[i]);
-
-    printf("\n");
-    return  0;
+#include <stdio.h>
+void s(int *a, int *b) {
+  int t = *a;
+  *a = *b;
+  *b = t;
 }
 
+int partition(int a[], int l, int h) {
+  int p = a[h];
+  int i = (l - 1);
+  for (int j = l; j < h; j++) {
+    if (a[j] <= p) {
+      i++;
+      s(&a[i], &a[j]);
+    }
+  }
+  s(&a[i + 1], &a[h]);
+  return (i + 1);
+}
+
+void qs(int a[], int l, int h) {
+  if (l < h) {
+    int pi = partition(a, l, h);
+    qs(a, l, pi - 1);
+    qs(a, pi + 1, h);
+  }
+}
+void pa(int a[], int size) {
+  for (int i = 0; i < size; ++i) {
+    printf("%d  ", a[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int data[] = {8, 7, 2, 1, 0, 9, 6};
+  int n = sizeof(data) / sizeof(data[0]);
+  qs(data, 0, n - 1);
+  printf("Sorted array in ascending order: \n");
+  pa(data, n);
+}

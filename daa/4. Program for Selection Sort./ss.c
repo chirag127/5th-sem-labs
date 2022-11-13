@@ -1,34 +1,42 @@
-// write a program for the selection sort in c
+// C program for implementation of selection sort
+#include <stdio.h>
 
-#include<stdio.h>
+void s(int *xp, int *yp)
+{
+    int t = *xp;
+    *xp = *yp;
+    *yp = t;
+}
+
+
+void ss(int a[], int n)
+{
+    int i, j, mi;
+    for (i = 0; i < n-1; i++)
+    {
+        mi = i;
+        for (j = i+1; j < n; j++)
+          if (a[j] < a[mi])
+            mi = j;
+        s(&a[mi], &a[i]);
+    }
+
+}
+
+void pa(int a[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", a[i]);
+    printf("\n");
+}
 
 int main()
 {
-    int  a[100], n, i, j, temp;
-
-    printf("This is the program for the selection sort in c \n written by Chirag Singhal \n roll number 2000330100084 \n");
-
-    printf( "Enter the number of elements : " );
-    scanf( "%d" , &n);
-    printf( "Enter the elements : " );
-    for (i = 0; i < n; i++)
-        scanf( "%d" , &a[i]);
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n - i - 1; j++)
-        {
-            if (a[j] > a[j + 1])
-            {
-                temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-        }
-    }
-    printf( "Sorted array is : " );
-    for (i = 0; i < n; i++)
-        printf( "%d " , a[i]);
-
-    printf("\n");
-    return  0;
+    int a[] = {64, 25, 12, 22, 11};
+    int n = sizeof(a)/sizeof(a[0]);
+    ss(a, n);
+    printf("Sorted array: \n");
+    pa(a, n);
+    return 0;
 }
