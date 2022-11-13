@@ -8,7 +8,7 @@ void s(int *a, int *b) {
   *b = t;
 }
 
-int partition(int a[], int l, int h) {
+int p(int a[], int l, int h) {
   int p = a[h];
   int i = (l - 1);
   for (int j = l; j < h; j++) {
@@ -23,7 +23,7 @@ int partition(int a[], int l, int h) {
 
 void qs(int a[], int l, int h) {
   if (l < h) {
-    int pi = partition(a, l, h);
+    int pi = p(a, l, h);
     qs(a, l, pi - 1);
     qs(a, pi + 1, h);
   }
@@ -38,6 +38,6 @@ int main() {
   int data[] = {8, 7, 2, 1, 0, 9, 6};
   int n = sizeof(data) / sizeof(data[0]);
   qs(data, 0, n - 1);
-  printf("Sorted array in ascending order: \n");
+  printf("Sorted is ");
   pa(data, n);
 }
