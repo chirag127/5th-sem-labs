@@ -1,53 +1,71 @@
-// write a program for the knapsack problem using greedy solution in c
 
-#include<stdio.h>
+#include <stdio.h>
 
-int main()
+void
+main ()
 {
-    int  n, i, j, t, m, p[100], w[100], x[100], tp = 0, tw = 0;
-    float  u;
-    printf( "Enter the number of objects : " );
-    scanf( "%d" , &n);
-    printf( "Enter the weights and profits of each object : " );
-    for (i = 0; i < n; i++)
-        scanf( "%d %d" , &w[i], &p[i]);
-    printf( "Enter the capacity of knapsack : " );
-    scanf( "%d" , &m);
-    for (i = 0; i < n; i++)
-        x[i] = 0;
-    for (i = 0; i < n; i++)
-        for (j = i + 1; j < n; j++)
-            if (p[i] < p[j])
-            {
-                t = p[i];
-                p[i] = p[j];
-                p[j] = t;
-                t = w[i];
-                w[i] = w[j];
-                w[j] = t;
-            }
-    u = m;
-    for (i = 0; i < n; i++)
-    {
-        if (w[i] > u)
-            break;
-        else
-        {
-            x[i] = 1;
-            tw = tw + w[i];
-            tp = tp + p[i];
-            u = u - w[i];
-        }
-    }
-    if (i < n)
-        x[i] = u / w[i];
-    tw = tw + (u * x[i]);
-    tp = tp + (p[i] * x[i]);
-    printf( "The result vector is : " );
-    for (i = 0; i < n; i++)
-        printf( "%d " , x[i]);
-    printf( "Maximum profit is : %d " , tp);
+  int capacity, no_items, cur_weight, item;
+  int used[10];
+  float total_profit;
+  int i;
+  int weight[10];
+  int value[10];
+  int j;
+  printf ("Enter the capacity of knapsack:\n");
+  scanf ("%d", &capacity);
 
-    printf("\n");
-    return  0;
+  printf ("Enter the number of items:\n");
+  scanf ("%d", &no_items);
+
+  printf ("Enter the weight and value of %d item:\n", no_items);
+  for (i = 0; i < no_items; i++)
+    {
+      printf ("Weight[%d]:\t", i);
+      scanf ("%d", &weight[i]);
+      printf ("Value[%d]:\t", i);
+      scanf ("%d", &value[i]);
+    }
+
+  for (i = 0; i < no_items; ++i)
+    used[i] = 0;
+
+  cur_weight = capacity;
+  do
+    {
+
+
+
+      j = j + 1;
+      item = -1;
+      for (i = 0; i < no_items; ++i)
+	if ((used[i] == 0) &&
+	    ((item == -1)
+	     || ((float) value[i] / weight[i] >
+		 (float) value[item] / weight[item])))
+	  item = i;
+
+      used[item] = 1;
+      cur_weight -= weight[item];
+      total_profit += value[item];
+      printf ("%d", i);
+      if (cur_weight >= 0)
+	printf
+	  ("Added object %d (%d Rs., %dKg) completely in the bag. Space left: %d.\n",
+	   item + 1, value[item], weight[item], cur_weight);
+      else
+	{
+	  int item_percent =
+	    (int) ((1 + (float) cur_weight / weight[item]) * 100);
+	  printf ("Added %d%% (%d Rs., %dKg) of object %d in the bag.\n",
+		  item_percent, value[item], weight[item], item + 1);
+	  total_profit -= value[item];
+	  total_profit +=
+	    (1 + (float) cur_weight / weight[item]) * value[item];
+	}
+
+    }
+  while (cur_weight > 0 && j < no_items);
+
+  printf ("Filled the bag with objects worth %.2f Rs.\n", total_profit);
 }
+
