@@ -9,10 +9,7 @@ sal_amt decimal(8,2) not null,
 tgt_to_get decimal(6,2) not null,
 ytd_sales decimal(6,2) not null,
 remarks varchar(30),
-constraint chk_salesman_no check(salesman_no like 's%'),
-constraint chk_sal_amt check(sal_amt>0),
-constraint chk_tgt_to_get check(tgt_to_get>0),
-constraint chk_ytd_sales check(ytd_sales>0)
+constraint chk_salesman_no check(salesman_no like 's%' and sal_amt>0 and tgt_to_get>0 and ytd_sales>0)
 );
 
 create table sales_order(
@@ -26,12 +23,9 @@ billed_yn char(1),
 dely_date date,
 order_status varchar(10),
 constraint fk_salesman_no foreign key(salesman_no) references sales_master(salesman_no),
-constraint chk_s_order_no check(s_order_no like '0%'),
-constraint chk_dely_type check(dely_type in ('p','f')),
-constraint chk_billed_yn check(billed_yn in ('y','n')),
-constraint chk_order_status check(order_status in ('in process','fulfilled','back order','canceled')),
-constraint chk_dely_date check(dely_date>s_order_date)
+constraint chk_s_order_no check(s_order_no like '0%' and dely_type in ('p','f') and billed_yn in ('y','n') and order_status in ('pending','delivered','cancelled'))
 );
+
 
 create table sales_order_details(
 s_order_no varchar(6) primary key,
@@ -41,9 +35,7 @@ qty_disp int(8),
 product_rate decimal(10,2),
 constraint fk_s_order_no foreign key(s_order_no) references sales_order(s_order_no),
 constraint fk_product_no foreign key(product_no) references product_master(product_no),
-constraint chk_qty_order check(qty_order>0),
-constraint chk_qty_disp check(qty_disp>0),
-constraint chk_product_rate check(product_rate>0)
+constraint chk_qty_order check(qty_order>0 and qty_disp>0 and product_rate>0)
 );
 
 insert into sales_master values('500001','Kiran','A/14 worli','Bombay','400002','Mah',3000,100,50,'Good');
@@ -58,7 +50,6 @@ insert into sales_order values('016865','18-feb-96','0003','F','Y','500003','20-
 insert into sales_order values('019003','03-apr-96','0001','F','Y','500001','07-apr-96','F');
 insert into sales_order values('046866','20-may-96','0004','P','N','500002','22-may-96','C');
 insert into sales_order values('010008','24-may-96','0005','F','N','500004','26-may-96','Ip');
-
 
 insert into sales_order_details values('019001','P00001',4,4,525);
 insert into sales_order_details values('019001','P07965',2,1,8400);

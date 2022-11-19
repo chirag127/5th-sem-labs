@@ -1,32 +1,4 @@
 
-create table client_master(
-client_no varchar(5) primary key,
-client_name varchar(20) not null,
-address varchar(20) not null,
-phone_no varchar(10)
-);
-
-create table product_master(
-product_no varchar(6) primary key,
-description varchar(20) not null,
-profit_percent number(3,2) not null,
-sell_price number(6,2) not null,
-cost_price number(6,2) not null
-);
-
-create table sales_order(
-s_order_no varchar(6) primary key,
-client_no varchar(5) references client_master(client_no),
-s_order_date date not null,
-billed_yn char(1) default 'N' check(billed_yn in ('Y','N'))
-);
-
-create table sales_order_details(
-s_order_no varchar(6) primary key references sales_order(s_order_no),
-product_no varchar(6) references product_master(product_no),
-qty number(4,2) not null
-);
-
 create table challan_header(
 challan_no varchar(6) primary key,
 s_order_no varchar(6) references sales_order(s_order_no),
@@ -34,22 +6,24 @@ challan_date date not null,
 billed_yn char(1) default 'N' check(billed_yn in ('Y','N'))
 );
 
+
 create table challan_details(
 challan_no varchar(6) primary key references challan_header(challan_no),
 qty_disp number(4,2) not null
 );
 
-insert into challan_header values('CH9001','019001','12-DEC-95','Y');
-insert into challan_header values('CH865','046865','12-NOV-95','Y');
-insert into challan_header values('CH3965','010008','12-OCT-95','Y');
 
-insert into challan_details values('CH9001','P00001',4),(CH9001','P07965',1),(CH9001','P07885',1),(CH6865','P07868',3),(CH6865','P03453',4),(CH6865','P00001',10),(CH3965','P00001',5),(CH3965','P07975',2);
+insert into challan_header values
+('CH9001','019001','12-DEC-95','Y'),
+('CH865','046865','12-NOV-95','Y'),
+('CH3965','010008','12-OCT-95','Y');
 
-alter table client_master add primary key(client_no);
-alter table client_master add phone_no varchar(10);
-alter table product_master modify description varchar(20) not null;
-alter table product_master modify profit_percent number(3,2) not null;
-alter table product_master modify sell_price number(6,2) not null;
-alter table product_master modify cost_price number(6,2) not null;
-alter table client_master modify client_no varchar(5);
-select product_no, description from product_master where profit_percent between 20 and 30;
+insert into challan_details values
+('CH9001','P00001',4),
+('CH9001','P07965',1),
+('CH9001','P07885',1),
+('CH6865','P07868',3),
+('CH6865','P03453',4),
+('CH6865','P00001',10),
+('CH3965','P00001',5),
+('CH3965','P07975',2);
