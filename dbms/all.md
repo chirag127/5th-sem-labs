@@ -1,262 +1,202 @@
-create table client_master
-(
-client_no varchar(6),
-name varchar(20),
-city varchar(15),
-state varchar(15),
-pincode int(6),
-bal_due decimal(10,2)
-);
 
-create table product_master
-(
-product_no varchar(6),
-description varchar(20),
-profit_percent decimal(10,2),
-unit_measure varchar(15),
-qty_on_hand int(6),
-reorder_lvl int(6),
-sell_price decimal(10,2),
-cost_price decimal(10,2)
-);
 
-insert into client_master values('0001','Ivan','Bombay','Maharashtra',400054,15000),
-('0002','Vandana','Madras','Tamilnadu',780001,0),
-('0003','Pramada','Bombay','Maharashtra',400057,5000),
-('0004','Basu','Bombay','Maharashtra',400056,0),
-('0005','Ravi','Delhi',100001,2000),
-('0006','Rukmini','Bombay','Maharashtra',400050,0);
+Table 1: client_master table
 
-insert into product_master values
-('P00001','1.44floppies',5,'piece',100,20,525,500),
-('P03453','Monitors',6,'piece',10,3,12000,11200),
-('P06734','Mouse',5,'piece',20,5,1050,500),
-('P07865','1.22 floppies',5,'piece',100,20,525,500),
-('P07868','Keyboards',2,'piece',10,3,3150,3050),
-('P07885','CD Drive',2.5,'piece',10,3,5250,5100),
-('P07965','540 HDD',4,'piece',10,3,8400,8000),
-('P07975','1.44 Drive',5,'piece',10,3,1050,1000),
-('P08865','1.22 Drive',5,'piece',2,3,1050,1000);
+| columnname | datatype | size |
+| --- | --- | --- |
+| client_no | varchar | 6 |
+| name | varchar | 20 |
+| city | varchar | 15 |
+| state | varchar | 15 |
+| pincode | int | 6 |
+| bal_due | decimal | 10,2 |
 
-select name from client_master;
-select name,city from client_master;
-select description from product_master;
-select name from client_master where city='Bombay';
-select *from client_master where client_no='0001' or client_no='0002';
-select* from product_master where description='1.44 drive' or description='1.22 Drive';
-select *from product_master where sell_price>5000;
-select* from client_master where city='Bombay' or city='Delhi' or city='Madras';
-select * from product_master where sell_price>2000 and sell_price<=5000;
-select name,city,state from client_master where state!='Maharashtra';
+Table 2: product_master table
 
-Question.1 Using the table client master and product master answer the following Queries.
+| columnname | datatype | size |
+| --- | --- | --- |
+| product_no | varchar | 6 |
+| description | varchar | 20 |
+| profit_percent | decimal | 10,2 |
+| unit_measure | varchar | 15 |
+| qty_on_hand | int | 6 |
+| reorder_lvl | int | 6 |
+| sell_price | decimal | 10,2 |
+| cost_price | decimal | 10,2 |
 
-i. Chage the selling price of ‘1.44 floppy drive to Rs.1150.00
+Table 1: sales_master schema
 
-answer:
-update product_master set sell_price=1150 where description='1.44 floppy drive';
+| Columnname | Datatype | Size | Attributes |
+|------------|----------|------|------------|
+| salesman_no | varchar | 6 | Primary key/first letter must start with ‘s’ |
+| sal_name | varchar | 20 | Not null |
+| address | varchar | 20 | Not null |
+| city | varchar | 20 | |
+| state | varchar | 20 | |
+| pincode | int | 6 | |
+| sal_amt | decimal | 8,2 | Not null, cannot be 0 |
+| tgt_to_get | decimal | 6,2 | Not null, cannot be 0 |
+| ytd_sales | decimal | 6,2 | Not null, cannot be 0 |
+| remarks | varchar | 30 | |
 
-ii. Delete the record with client 0001 from the client master table.
+Table 2: sales_order Schema
 
-answer:
-delete from client_master where client_no='0001';n
+| Columnname | Datatype | Size | Attributes |
+|------------|----------|------|------------|
+| s_order_no | varchar | 6 | Primary/first letter must be 0 |
+| s_order_date | date | 6 | Primary key reference clientno of client_master table |
+| client_no | varchar | 25 |
+| dely_add | varchar | 6 |
+| salesman_no | varchar | 6 | Foreign key references salesman_no of salesman_master table |
+| dely_type | char | 1 | Delivery part(p)/full(f),default f |
+| billed_yn | char | 1 |
+| dely_date | date | Can not be lessthan s_order_date |
+| order_status | varchar | 10 | Values (‘in process’;’fulfilled’;back order’;’canceled |
 
-iii. Change the city of client_no’0005’ to Bombay.
+Table 3: sales_order_details Schema
 
-answer:
-update client_master set city='Bombay' where client_no='0005';
+| Column | Datatype | Size | Attributes |
+|--------|----------|------|------------|
+| s_order_no | varchar | 6 | Primary key/foreign key references s_order_no of sales_order |
+| product_no | varchar | 6 | Primary key/foreign key references product_no of product_master |
+| qty_order | int | 8 |
+| qty_disp | int | 8 |
+| product_rate | decimal | 10,2 |
 
-iv. Change the bal_due of client_no ‘0001, to 1000.
+Table 4: sales_master table data
 
-answer:
-update client_master set bal_due=1000 where client_no='0001';
+| salesman_no | salesman name | address | city | pin code | state | salamt | tgt\_to\_g et | ytd sales | remark |
+|-------------|---------------|---------|------|----------|-------|--------|--------------|-----------|--------|
+| 500001 | Kiran | A/14 worli | Bomba y | 400002 | Mah | 3000 | 100 | 50 | Good |
+| 500002 | Manish | 65,nariman | Bomba y | 400001 | Mah | 3000 | 200 | 100 | Good |
+| 500003 | Ravi | P-7 Bandra | Bomba y | 400032 | Mah | 3000 | 200 | 100 | Good |
+| 500004 | Ashish | A/5 Juhu | Bomba y | 400044 | Mah | 3500 | 200 | 150 | Good |
 
-v. Find the products whose selling price is more than 1500 and also find the new selling price as
-original selling price *15.
+Table 5: sales_order table data
 
-answer:
-select sell_price, sell_price*15 from product_master where sell_price>1500;
+| s_order_no | s_order_date | client_no | dely_type | billed_yn | salesman_no | dely_date | order_status |
+|------------|--------------|-----------|-----------|-----------|-------------|-----------|--------------|
+| 019001 | 12-jan-96 | 0001 | F | N | 50001 | 20-jan-96 | Ip |
+| 019002 | 25-jan-96 | 0002 | P | N | 50002 | 27-jan-96 | C |
+| 016865 | 18-feb-96 | 0003 | F | Y | 500003 | 20-feb-96 | F |
+| 019003 | 03-apr-96 | 0001 | F | Y | 500001 | 07-apr-96 | F |
+| 046866 | 20-may-96 | 0004 | P | N | 500002 | 22-may-96 | C |
+| 010008 | 24-may-96 | 0005 | F | N | 500004 | 26-may-96 | Ip |
 
-vi. Find out the clients who stay in a city whose second letter is a.
+Table 6: sales_order_details table data
 
-answer:
-select * from client_master where city like '_a%';
+| s_order_no | product_no | qty_order | qty_disp | product_rate |
+|------------|------------|-----------|----------|--------------|
+| 019001 | P00001 | 4 | 4 | 525 |
+| 019001 | P07965 | 2 | 1 | 8400 |
+| 019001 | P07885 | 2 | 1 | 5250 |
+| 019002 | P00001 | 10 | 0 | 525 |
+| 046865 | P07868 | 3 | 3 | 3150 |
+| 046865 | P07885 | 10 | 10 | 5250 |
+| 019003 | P00001 | 4 | 4 | 1050 |
+| 019003 | P03453 | 2 | 2 | 1050 |
+| 046866 | P06734 | 1 | 1 | 12000 |
+| 046866 | P07965 | 1 | 0 | 8400 |
+| 010008 | P07975 | 1 | 0 | 1050 |
+| 010008 | P00001 | 10 | 5 | 525 |
 
-vii. Find out the name of all clients having ‘a’ as the second letter in their names.
+<div style="page-break-after: always;"></div>
 
-answer:
-select * from client_master where name like '_a%';
+Table 1: Challan_Header table
 
-viii. List the products in sorted order of their description.
+| Column name | Data type | Size | Attributes |
+|-------------|-----------|------|------------|
+| challan_no | varchar | 6 | Primary key |
+| s_order_no | varchar | 6 | Foreign key references s_order_no of sales_order table |
+| challan_date | date | not null | |
+| billed_yn | char | 1 | values (‘Y’,’N’). Default ‘N’ |
 
-answer:
-select * from product_master order by description;
+Table 2: Challan_Details table
 
-ix. Count the total number of orders
+| Column name | Data type | Size | Attributes |
+|-------------|-----------|------|------------|
+| challan_no | varchar | 6 | Primary key/Foreign key references Product_no of product_master |
+| qty_disp | number | 4,2 | not null |
 
-answer:
-select count(*) from client_master;
+Table 3: Challan_Header table data
 
-x. Calculate the average price of all the products.
+| challan_no | s_order_no | challan_date | billed_yn |
+|------------|------------|--------------|-----------|
+| CH9001 | 019001 | 12-DEC-95 | Y |
+| CH865 | 046865 | 12-NOV-95 | Y |
+| CH3965 | 010008 | 12-OCT-95 | Y |
 
-answer:
-select avg(sell_price) from product_master;
+Table 4: Challan_Details table data
 
-xi. Calculate the minimum price of products.
+| challan_no | qty_disp |
+|------------|----------|
+| CH9001 | 4 |
+| CH9001 | 1 |
+| CH9001 | 1 |
+| CH6865 | 3 |
+| CH6865 | 4 |
+| CH6865 | 10 |
+| CH3965 | 5 |
+| CH3965 | 2 |
 
-answer:
-select min(sell_price) from product_master;
+<div style="page-break-after: always;"></div>
 
-xii. Determine the maximum and minimum prices . Rename the tittle as ‘max_price’ and
-min_price respectively.
+Table 5: BOOK tables
 
-answer:
-select max(sell_price) as max_price, min(sell_price) as min_price from product_master;
-
-xiii. Count the number of products having price greater than or equal to 1500.
-
-answer:
-select count(*) from product_master where sell_price>=1500;
-
-ALL ANSWERS ARE
-update product_master set sell_price=1150 where description='1.44 floppy drive';
-delete from client_master where client_no='0001';
-update client_master set city='Bombay' where client_no='0005';
-update client_master set bal_due=1000 where client_no='0001';
-select *from product_master where sell_price>1500;
-select* from client_master where city like '_a%';
-select * from client_master where name like '_a%';
-select *from product_master order by description;
-select count(*) from order_master;
-select avg(sell_price) from product_master;
-select min(sell_price) from product_master;
-select max(sell_price) from product_master;
-select min(sell_price) as min_price,max(sell_price) as max_price from product_master;
-select count(*) from product_master where sell_price>=1500;
-
-Experiment No.3
-
-create table sales_master(
-salesman_no varchar(6) primary key,
-sal_name varchar(20) not null,
-address varchar(20) not null,
-city varchar(20),
-state varchar(20),
-pincode int(6),
-sal_amt decimal(8,2) not null,
-tgt_to_get decimal(6,2) not null,
-ytd_sales decimal(6,2) not null,
-remarks varchar(30),
-constraint chk_salesman_no check(salesman_no like 's%'),
-constraint chk_sal_amt check(sal_amt>0),
-constraint chk_tgt_to_get check(tgt_to_get>0),
-constraint chk_ytd_sales check(ytd_sales>0)
-);
-
-create table sales_order(
-s_order_no varchar(6) primary key,
-s_order_date date primary key,
-client_no varchar(25),
-dely_add varchar(6),
-salesman_no varchar(6),
-dely_type char(1) default 'f',
-billed_yn char(1),
-dely_date date,
-order_status varchar(10),
-constraint fk_salesman_no foreign key(salesman_no) references sales_master(salesman_no),
-constraint chk_s_order_no check(s_order_no like '0%'),
-constraint chk_dely_type check(dely_type in ('p','f')),
-constraint chk_billed_yn check(billed_yn in ('y','n')),
-constraint chk_order_status check(order_status in ('in process','fulfilled','back order','canceled')),
-constraint chk_dely_date check(dely_date>s_order_date)
-);
-
-create table sales_order_details(
-s_order_no varchar(6) primary key,
-product_no varchar(6) primary key,
-qty_order int(8),
-qty_disp int(8),
-product_rate decimal(10,2),
-constraint fk_s_order_no foreign key(s_order_no) references sales_order(s_order_no),
-constraint fk_product_no foreign key(product_no) references product_master(product_no),
-constraint chk_qty_order check(qty_order>0 and qty_disp>0 and product_rate>0)
-);
-
-insert into sales_master values
-('500001','Kiran','A/14 worli','Bombay','400002','Mah',3000,100,50,'Good'),
-('500002','Raj','A/14 worli','Bombay','400002','Mah',3000,100,50,'Good'),
-('500003','Ravi','P-7 Bandra','Bombay','400032','Mah',3000,200,100,'Good'),
-('500004','Ashish','A/5 Juhu','Bombay','400044','Mah',3500,200,150,'Good');
-
-insert into sales_order values
-('019001','12-jan-96','0001','F','N','50001','20-jan-96','Ip'),
-('019002','25-jan-96','0002','P','N','50002','27-jan-96','C'),
-('019003','12-jan-96','0003','F','N','50003','20-jan-96','Ip'),
-('016865','18-feb-96','0003','F','Y','500003','20-feb-96','F'),
-('019003','03-apr-96','0001','F','Y','500001','07-apr-96','F'),
-('046866','20-may-96','0004','P','N','500002','22-may-96','C'),
-('010008','24-may-96','0005','F','N','500004','26-may-96','Ip');
-
-insert into sales_order_details values('019001','P00001',4,4,525);
-insert into sales_order_details values('019001','P07965',2,1,8400);
-insert into sales_order_details values('019001','P07885',2,1,5250);
-insert into sales_order_details values('019002','P00001',10,0,525);
-insert into sales_order_details values('046865','P07868',3,3,3150);
-insert into sales_order_details values('046865','P07885',10,10,5250);
-insert into sales_order_details values('019003','P00001',4,4,1050);
-insert into sales_order_details values('019003','P03453',2,2,1050);
-insert into sales_order_details values('046866','P06734',1,1,12000);
-insert into sales_order_details values('046866','P07965',1,0,8400);
-insert into sales_order_details values('010008','P07975',1,0,1050);
-insert into sales_order_details values('010008','P00001',10,5,525);
-
-Experiment No.4
-
-create table challan_header(
-challan_no varchar(6) primary key,
-s_order_no varchar(6) references sales_order(s_order_no),
-challan_date date not null,
-billed_yn char(1) default 'N' check(billed_yn in ('Y','N'))
-);
-
-create table challan_details(
-challan_no varchar(6) primary key references challan_header(challan_no),
-qty_disp number(4,2) not null
-);
-
-insert into challan_header values
-('CH9001','019001','12-DEC-95','Y'),
-('CH865','046865','12-NOV-95','Y'),
-('CH3965','010008','12-OCT-95','Y');
-
-insert into challan_details values
-('CH9001','P00001',4),
-('CH9001','P07965',1),
-('CH9001','P07885',1),
-('CH6865','P07868',3),
-('CH6865','P03453',4),
-('CH6865','P00001',10),
-('CH3965','P00001',5),
-('CH3965','P07975',2);
+| Tables | Columns |
+|--------|---------|
+| BOOK | (Book_id, Title, Publisher_Name, Pub_Year) |
+| BOOK_AUTHORS | (Book_id, Author_Name) |
+| PUBLISHER | (Name, Address, Phone) |
+| BOOK_COPIES | (Book_id, Branch_id, No-of_Copies) |
+| BOOK_LENDING | (Book_id, Branch_id, Card_No, Date_Out, Due_Date) |
+| LIBRARY_BRANCH | (Branch_id, Branch_Name, Address) |
 
 Objective – Answer the following Queries
+
+
 Q1. Make the primary key to client_no in client_master.
+
 Ans:
+
+alter table client_master add primary key(client_no);
+
 Q2. Add a new column phone_no in the client_master table.
+
+Ans:
+
+alter table client_master add phone_no varchar(10);
+
 Q3. Add the not null constraint in the product_master table with the columns description, profit
 percent , sell price and cost price.
+
+Ans:
+
+
+
+
+
+
 Q4. Change the size of client_no field in the client_master table.
+
+Ans:
+
+alter table client_master modify client_no varchar(4);
+
 Q5. Select product_no, description where profit percent is between 20 and 30 both inclusive.
+
+Ans:
+
+select product_no, description from product_master where profit_percent between 20 and 30;
 
 // answer the above questions in mysql syntax
 alter table client_master add primary key(client_no);
 alter table client_master add phone_no varchar(10);
-alter table product_master modify description varchar(20) not null;
-alter table product_master modify profit_percent number(3,2) not null;
-alter table product_master modify sell_price number(6,2) not null;
-alter table product_master modify cost_price number(6,2) not null;
-alter table client_master modify client_no varchar(5);
+alter table product_master modify(description varchar(20) not null, profit_percent number(5,2) not null, sell_price number(10,2) not null, cost_price number(10,2) not null);
+alter table client_master modify client_no varchar(4);
 select product_no, description from product_master where profit_percent between 20 and 30;
+
+
 
 Experiment No.5
 Theory & Concept
@@ -668,6 +608,70 @@ select to_char(s_order_date, ‘dd-mm-yy’) from sales_order;
 
 select s_order_date + 15 from sales_order;
 
+
+// now with questions Answered, you can go ahead and try to solve them yourself. If you get stuck, you can always come back to this post and check the answers.
+1. Find out the product which has been sold to 'Ivan Sayross'.
+
+answer:
+
+select * from product_master where product_no in (select product_no from sales_order_details where s_order_no in (select s_order_no from sales_order where client_no in (select client_no from client_master where client_name = 'Ivan Sayross')));
+
+2. Find out the product and their quantities that will have do delivered.
+
+answer:
+
+select * from product_master where product_no in (select product_no from sales_order_details where s_order_no in (select s_order_no from sales_order where order_status = 'Ip'));
+
+3. Find the product_no and description of moving products.
+
+answer:
+
+select product_no, product_desc from product_master where product_no in (select product_no from sales_order_details where qty_disp > 0);
+
+4. Find out the names of clients who have purchased 'CD DRIVE'
+
+answer:
+
+select client_name from client_master where client_no in (select client_no from sales_order where s_order_no in (select s_order_no from sales_order_details where product_no = 'P00001'));
+
+5. List the product_no and s_order_no of customers haaving qty ordered less than 5 from the order details table for the product "1.44 floppies".
+
+answer:
+
+select product_no, s_order_no from sales_order_details where qty_order < 5 and product_no = 'P00001';
+
+6. Find the products and their quantities for the orders placed by 'Vandan Saitwal ' and "Ivan Bayross".
+
+answer:
+
+select product_no, qty_disp from sales_order_details where s_order_no in (select s_order_no from sales_order where client_no in (select client_no from client_master where client_name = 'Vandan Saitwal' or client_name = 'Ivan Bayross'));
+
+7. Find the products and their quantities for the orders placed by client_no " C00001" and "C00002"
+
+answer:
+
+select product_no, qty_disp from sales_order_details where s_order_no in (select s_order_no from sales_order where client_no = 'C00001' or client_no = 'C00002');
+
+8. Find the order No,, Client No and salesman No. where a client has been received by more than one salesman.
+
+answer:
+
+select s_order_no, client_no, salesman_no from sales_order where client_no in (select client_no from sales_order group by client_no having count(client_no) > 1);
+
+9. Display the s_order_date in the format "dd-mm-yy" e.g. "12- feb-96"
+
+answer:
+
+select to_char(s_order_date, 'dd-mm-yy') from sales_order;
+
+10. Find the date , 15 days after date.
+
+answer:
+
+select s_order_date + 15 from sales_order;
+
+
+
 <div style="page-break-after: always;"></div>
 
 Experiment No.7
@@ -858,7 +862,10 @@ Q8.- Select product_no, product description and qty ordered for each product.
 Q9.- Display the order number and day on which clients placed their order.
 Q10.- Display the month and Date when the order must be delivered.
 
+
 Answer:
+
+
 
 1
 
@@ -961,7 +968,10 @@ on an inventory control system.
 10. Select the product_no, description, qty_on-hand,cost_price of non_moving items in the
 product_master table.
 
+
 Answer:
+
+
 
 1. Find the product_no and description of non- moving products.
 
@@ -1215,7 +1225,10 @@ city, pcode, state respectively.
 Q9. Select the client names from client_view who lives in city ‘Bombay’.
 Q10. Drop the view client_view.
 
+
 Answer:
+
+
 
 1. Create an index on the table client_master, field client_no.
 
@@ -1316,7 +1329,10 @@ Q5. WAP in PL/SQL for changing the price of product ‘P00001’ to 4000 if the 
  4000 in product_master table. The change is recorded in the old_price_table along with
  product_no and the date on which the price was changed last.
 
+
 Answer:
+
+
 
 1. WAP in PL/SQL for addition of two numbers.
 

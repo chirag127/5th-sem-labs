@@ -1453,6 +1453,54 @@ Table 5: BOOK tables
 | BOOK_LENDING | (Book_id, Branch_id, Card_No, Date_Out, Due_Date) |
 | LIBRARY_BRANCH | (Branch_id, Branch_Name, Address) |
 
+Q1. Make the primary key to client_no in client_master.
+
+Ans:
+
+// answer the above questions in mysql syntax
+alter table client_master add primary key(client_no);
+
+Q2. Add a new column phone_no in the client_master table.
+
+Ans:
+
+// answer the above questions in mysql syntax
+alter table client_master add phone_no varchar(10);
+
+
+Q3. Add the not null constraint in the product_master table with the columns description, profit
+percent , sell price and cost price.
+
+Ans:
+
+// answer the above questions in mysql syntax
+alter table product_master add not null constraint(description, profit_percent, sell_price, cost_price );
+
+
+Q4. Change the size of client_no field in the client_master table.
+
+Ans:
+
+// answer the above questions in mysql syntax
+alter table client_master modify client_no
+varchar(10)
+
+
+
+Q5. Select product_no, description where profit percent is between 20 and 30 both inclusive.
+
+
+Ans:
+
+// answer the above questions in mysql syntax
+select product_no, description from product_master where profit_percent between 20 and 30;
+
+
+// all answer are
+
+alter table client_master add primary key(client_no);
+
+
 
 Write SQL queries to :
 1. Retrieve details of all books in the library – id, title, name of publisher, authors, number of copies

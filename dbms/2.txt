@@ -5,7 +5,7 @@ select * from product_master where sell_price>1500;
 select * from client_master where city like '_a%';
 select * from client_master where name like '_a%';
 select * from product_master order by description;
-select count(*) from order_master;
+select count(*) from product_master;
 select avg(sell_price) from product_master;
 select min(sell_price) from product_master;
 select max(sell_price) from product_master;
