@@ -1367,15 +1367,6 @@ Q5. Select product_no, description where profit percent is between 20 and 30 bot
 
 
 // answer the above questions in mysql syntax
-alter table client_master add primary key(client_no);
-alter table client_master add phone_no varchar(10);
-alter table product_master modify description varchar(20) not null;
-alter table product_master modify profit_percent number(3,2) not null;
-alter table product_master modify sell_price number(6,2) not null;
-alter table product_master modify cost_price number(6,2) not null;
-alter table client_master modify client_no varchar(5);
-select product_no, description from product_master where profit_percent between 20 and 30;
-
 
 
 

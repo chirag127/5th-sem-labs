@@ -49,10 +49,10 @@ constraint fk_product_no foreign key(product_no) references product_master(produ
 
 
 insert into sales_master values
-('s500001','Kiran','A/14 worli','Bombay','Mah','400002',3000,100,50,'Good'),
-('s500002','Raj','A/14 worli','Bombay','Mah','400002',3000,100,50,'Good'),
-('s500003','Ravi','P-7 Bandra','Bombay','Mah','400032',3000,200,100,'Good'),
-('s500004','Ashish','A/5 Juhu','Bombay','Mah','400044',3500,200,150,'Good');
+('s00001','Kiran','A/14 worli','Bombay','Mah','400002',3000,100,50,'Good'),
+('s00002','Raj','A/14 worli','Bombay','Mah','400002',3000,100,50,'Good'),
+('s00003','Ravi','P-7 Bandra','Bombay','Mah','400032',3000,200,100,'Good'),
+('s00004','Ashish','A/5 Juhu','Bombay','Mah','400044',3500,200,150,'Good');
 
 insert into sales_order values
 ('019001','1996-01-12','0001','F','N','s0001','1996-01-20','Ip'),

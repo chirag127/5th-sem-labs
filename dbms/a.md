@@ -25,7 +25,7 @@
 | ------------ | -------- | -------------------------------- | ----------------------------------------------------------- |
 | s_order_no   | varchar  | 6                                | Primary/first letter must be 0                              |
 | s_order_date | date     | 6                                |                                                             |
-| client_no    | varchar  | 25                               | Primary key reference clientno of client_master table       |
+| client_no    | varchar  | 25                               | Foreign key reference clientno of client_master table       |
 | dely_add     | varchar  | 6                                |
 | salesman_no  | varchar  | 6                                | Foreign key references salesman_no of salesman_master table |
 | dely_type    | char     | 1                                | Delivery part(p)/full(f),default f                          |
@@ -47,12 +47,12 @@
 
 ## Table 4: sales_master table data
 
-| salesman_no | salesman name | address    | city    | pin code | state | salamt | tgt_to_g et | ytd sales | remark |
-| ----------- | ------------- | ---------- | ------- | -------- | ----- | ------ | ----------- | --------- | ------ |
-| 500001      | Kiran         | A/14 worli | Bomba y | 400002   | Mah   | 3000   | 100         | 50        | Good   |
-| 500002      | Manish        | 65,nariman | Bomba y | 400001   | Mah   | 3000   | 200         | 100       | Good   |
-| 500003      | Ravi          | P-7 Bandra | Bomba y | 400032   | Mah   | 3000   | 200         | 100       | Good   |
-| 500004      | Ashish        | A/5 Juhu   | Bomba y | 400044   | Mah   | 3500   | 200         | 150       | Good   |
+| salesman_no | salesman name | address    | city    | state | pin code | salamt | tgt_to_g et | ytd sales | remark |
+| ----------- | ------------- | ---------- | ------- | ----- | -------- | ------ | ----------- | --------- | ------ |
+| 500001      | Kiran         | A/14 worli | Bomba y | Mah   | 400002   | 3000   | 100         | 50        | Good   |
+| 500002      | Manish        | 65,nariman | Bomba y | Mah   | 400001   | 3000   | 200         | 100       | Good   |
+| 500003      | Ravi          | P-7 Bandra | Bomba y | Mah   | 400032   | 3000   | 200         | 100       | Good   |
+| 500004      | Ashish        | A/5 Juhu   | Bomba y | Mah   | 400044   | 3500   | 200         | 150       | Good   |
 
 ## Table 5: sales_order table data
 
@@ -85,7 +85,6 @@
 | 010008     | P00001     | 10        | 5        | 525          |
 
 <div style="page-break-after: always;"></div>
-
 <center>
 <h1> Experiment 4</h1>
 </center>
