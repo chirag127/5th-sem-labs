@@ -2,13 +2,11 @@
 <h1> Experiment 3</h1>
 </center>
 
-
-
 ## Table 1: sales_master schema
 
 | Columnname  | Datatype | Size | Attributes                                   |
 | ----------- | -------- | ---- | -------------------------------------------- |
-| salesman_no | varchar  | 6    | first letter must start with ‘s’ |
+| salesman_no | varchar  | 6    | Primary key/first letter must start with ‘s’ |
 | sal_name    | varchar  | 20   | Not null                                     |
 | address     | varchar  | 20   | Not null                                     |
 | city        | varchar  | 20   |                                              |
@@ -27,10 +25,10 @@
 | s_order_date | date     | 6                                |                                                             |
 | client_no    | varchar  | 25                               | Foreign key reference clientno of client_master table       |
 | dely_add     | varchar  | 6                                |
-| salesman_no  | varchar  | 6                                | references salesman_no of salesman_master table |
+| salesman_no  | varchar  | 6                                | Foreign key references salesman_no of salesman_master table |
 | dely_type    | char     | 1                                | Delivery part(p)/full(f),default f                          |
 | billed_yn    | char     | 1                                |
-| dely_date    | date     | |Can not be lessthan s_order_date |
+| dely_date    | date     | Can not be lessthan s_order_date |
 | order_status | varchar  | 10                               | Values (‘in process’;’fulfilled’;back order’;’canceled      |
 
 <div style="page-break-after: always;"></div>
@@ -93,44 +91,41 @@
 
 ## Table 1: Challan_Header table
 
-| Column name | Data type | Size | Attributes |
-|-------------|-----------|------|------------|
-| challan_no | varchar | 6 | Primary key |
-| s_order_no | varchar | 6 | Foreign key references s_order_no of sales_order table |
-| challan_date | date | not null | |
-| billed_yn | char | 1 | values (‘Y’,’N’). Default ‘N’ |
+| Column name  | Data type | Size     | Attributes                                             |
+| ------------ | --------- | -------- | ------------------------------------------------------ |
+| challan_no   | varchar   | 6        | Primary key                                            |
+| s_order_no   | varchar   | 6        | Foreign key references s_order_no of sales_order table |
+| challan_date | date      | not null |                                                        |
+| billed_yn    | char      | 1        | values (‘Y’,’N’). Default ‘N’                          |
 
 ## Table 2: Challan_Details table
 
-| Column name | Data type | Size | Attributes |
-|-------------|-----------|------|------------|
-| challan_no | varchar | 6 | Primary key/Foreign key references Product_no of product_master |
-| qty_disp | number | 4,2 | not null |
+| Column name | Data type | Size | Attributes                                                      |
+| ----------- | --------- | ---- | --------------------------------------------------------------- |
+| challan_no  | varchar   | 6    | Primary key/Foreign key references Product_no of product_master |
+| product_no  | varchar   | 6    | Primary key/Foreign key references Product_no of product_master |
+| qty_disp    | number    | 4,2  | not null                                                        |
 
 ## Table 3: Challan_Header table data
 
 | challan_no | s_order_no | challan_date | billed_yn |
-|------------|------------|--------------|-----------|
-| CH9001 | 019001 | 12-DEC-95 | Y |
-| CH865 | 046865 | 12-NOV-95 | Y |
-| CH3965 | 010008 | 12-OCT-95 | Y |
-
-
-<div style="page-break-after: always;"></div>
-
+| ---------- | ---------- | ------------ | --------- |
+| CH9001     | 019001     | 12-DEC-95    | Y         |
+| CH865      | 046865     | 12-NOV-95    | Y         |
+| CH3965     | 010008     | 12-OCT-95    | Y         |
 
 ## Table 4: Challan_Details table data
 
 | challan_no | qty_disp |
-|------------|----------|
-| CH9001 | 4 |
-| CH9001 | 1 |
-| CH9001 | 1 |
-| CH6865 | 3 |
-| CH6865 | 4 |
-| CH6865 | 10 |
-| CH3965 | 5 |
-| CH3965 | 2 |
+| ---------- | -------- |
+| CH9001     | 4        |
+| CH9001     | 1        |
+| CH9001     | 1        |
+| CH6865     | 3        |
+| CH6865     | 4        |
+| CH6865     | 10       |
+| CH3965     | 5        |
+| CH3965     | 2        |
 
 <div style="page-break-after: always;"></div>
 
@@ -140,11 +135,11 @@
 
 ## Table 5: BOOK tables
 
-| Tables | Columns |
-|--------|---------|
-| BOOK | (Book_id, Title, Publisher_Name, Pub_Year) |
-| BOOK_AUTHORS | (Book_id, Author_Name) |
-| PUBLISHER | (Name, Address, Phone) |
-| BOOK_COPIES | (Book_id, Branch_id, No-of_Copies) |
-| BOOK_LENDING | (Book_id, Branch_id, Card_No, Date_Out, Due_Date) |
-| LIBRARY_BRANCH | (Branch_id, Branch_Name, Address) |
+| Tables         | Columns                                           |
+| -------------- | ------------------------------------------------- |
+| BOOK           | (Book_id, Title, Publisher_Name, Pub_Year)        |
+| BOOK_AUTHORS   | (Book_id, Author_Name)                            |
+| PUBLISHER      | (Name, Address, Phone)                            |
+| BOOK_COPIES    | (Book_id, Branch_id, No-of_Copies)                |
+| BOOK_LENDING   | (Book_id, Branch_id, Card_No, Date_Out, Due_Date) |
+| LIBRARY_BRANCH | (Branch_id, Branch_Name, Address)                 |
