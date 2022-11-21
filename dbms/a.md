@@ -2,7 +2,7 @@
 <h1> Experiment 3</h1>
 </center>
 
-# Tables
+
 
 ## Table 1: sales_master schema
 
