@@ -8,7 +8,7 @@
 
 | Columnname  | Datatype | Size | Attributes                                   |
 | ----------- | -------- | ---- | -------------------------------------------- |
-| salesman_no | varchar  | 6    | Primary key/first letter must start with ‘s’ |
+| salesman_no | varchar  | 6    | first letter must start with ‘s’ |
 | sal_name    | varchar  | 20   | Not null                                     |
 | address     | varchar  | 20   | Not null                                     |
 | city        | varchar  | 20   |                                              |
@@ -27,7 +27,7 @@
 | s_order_date | date     | 6                                |                                                             |
 | client_no    | varchar  | 25                               | Foreign key reference clientno of client_master table       |
 | dely_add     | varchar  | 6                                |
-| salesman_no  | varchar  | 6                                | Foreign key references salesman_no of salesman_master table |
+| salesman_no  | varchar  | 6                                | references salesman_no of salesman_master table |
 | dely_type    | char     | 1                                | Delivery part(p)/full(f),default f                          |
 | billed_yn    | char     | 1                                |
 | dely_date    | date     | |Can not be lessthan s_order_date |
@@ -114,6 +114,10 @@
 | CH9001 | 019001 | 12-DEC-95 | Y |
 | CH865 | 046865 | 12-NOV-95 | Y |
 | CH3965 | 010008 | 12-OCT-95 | Y |
+
+
+<div style="page-break-after: always;"></div>
+
 
 ## Table 4: Challan_Details table data
 
