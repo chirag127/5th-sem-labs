@@ -30,7 +30,7 @@
 | salesman_no  | varchar  | 6                                | Foreign key references salesman_no of salesman_master table |
 | dely_type    | char     | 1                                | Delivery part(p)/full(f),default f                          |
 | billed_yn    | char     | 1                                |
-| dely_date    | date     | Can not be lessthan s_order_date |
+| dely_date    | date     | |Can not be lessthan s_order_date |
 | order_status | varchar  | 10                               | Values (‘in process’;’fulfilled’;back order’;’canceled      |
 
 <div style="page-break-after: always;"></div>
