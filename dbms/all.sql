@@ -479,14 +479,22 @@ where client_no in (
         where s_order_no in (
                 select s_order_no
                 from sales_order_details
-                where product_no = 'P00001'
+                where product_no in (
+                        select product_no
+                        from product_master
+                        where description = 'CD DRIVE'
+                    )
             )
     );
 -- 5. List the product_no and s_order_no of customers haaving qty ordered less than 5 from the order details table for the product "1.44 floppies".
 select product_no,
     s_order_no
 from sales_order_details
-where product_no = 'P00001'
+where product_no in (
+        select product_no
+        from product_master
+        where description = '1.44 floppies'
+    )
     and qty_order < 5;
 -- 6. Find the products and their quantities for the orders placed by 'Vandan Saitwal ' and "Ivan Bayross".
 select product_no,
