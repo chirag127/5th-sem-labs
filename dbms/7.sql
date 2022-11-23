@@ -31,13 +31,14 @@ where p.product_no = sod.product_no
     and so.s_order_no = sod.s_order_no
     and c.name = 'Ivan Sayross';
 -- Q5.- Find the names of clients who have ‘CD Drive’.
-select name
-from client_master c,
+select name from client_master c,
     sales_order so,
-    sales_order_details sod
+    sales_order_details sod,
+    product_master p
 where c.client_no = so.client_no
     and so.s_order_no = sod.s_order_no
-    and sod.product_no = 'P00001';
+    and sod.product_no = p.product_no
+    and p.description = 'CD DRIVE';
 -- Q6.- Find the products and their quantities for the orders placed by ‘Vandana’ and ‘Ivan’.
 select product_no,
     qty_order
