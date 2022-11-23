@@ -39,7 +39,7 @@ where client_no in (
         where s_order_no in (
                 select s_order_no
                 from sales_order_details
-                where product_no = 'P00001'
+                where product_no = '1.44 Drive'
             )
     );
 -- 5. find the names of client who have placed orders worth Rs.10000 or more.
