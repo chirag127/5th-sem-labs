@@ -1,33 +1,31 @@
-// write a program to perform constant propagation.
+// write a program to perform co propagation.
 
 
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-void input();
-void output();
-void change(int p, char *res);
-void constant();
+void i();
+void o();
+void ch(int p, char *res);
+void co();
 struct expr
 {
     char op[2], op1[5], op2[5], res[5];
     int flag;
 } arr[10];
 int n;
-void main()
+int main()
 {
-    clrscr();
-    input();
-    constant();
-    output();
-    getch();
-}
-void input()
+    i();
+    co();
+    o();
+    return 0;}
+void i()
 {
     int i;
-    printf("\n\nEnter the maximum number of  expressions : ");
+    printf("\n\nEnter the maximum no. of  expressions : ");
     scanf("%d", &n);
-    printf("\nEnter the input : \n");
+    printf("\nEnter the i : \n");
     for (i = 0; i < n; i++)
     {
         scanf("%s", arr[i].op);
@@ -37,7 +35,7 @@ void input()
         arr[i].flag = 0;
     }
 }
-void constant()
+void co()
 {
     int i;
     int op1, op2, res;
@@ -69,11 +67,11 @@ void constant()
             }
             sprintf(res1, "%d", res);
             arr[i].flag = 1; /*eliminate expr and replace any operand below that uses result of this expr */
-            change(i, res1);
+            ch(i, res1);
         }
     }
 }
-void output()
+void o()
 {
     int i = 0;
     printf("\nOptimized code is : ");
@@ -85,7 +83,7 @@ void output()
         }
     }
 }
-void change(int p, char *res)
+void ch(int p, char *res)
 {
     int i;
     for (i = p + 1; i < n; i++)

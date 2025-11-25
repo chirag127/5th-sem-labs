@@ -1,4 +1,4 @@
-// Implement the back end of the compiler which takes the three address code and produces the 8086 assembly language instructions that can be assembled and run using an 8086 assembler. The target assembly instructions can be simple move, add, sub, jump etc.
+// Implement the back end of the compiler which takes the three address code and produces the 8086 assembly language insuctions that can be assembled and run using an 8086 assembler. The target assembly insuctions can be simple move, add, sub, jump etc.
 
 #include <stdio.h>
 
@@ -6,38 +6,37 @@
 
 void main()
 {
-    char icode[10][30], str[20], opr[10];
+    char icode[10][30], s[20], o[10];
     int i = 0;
     // clrscr();
-    printf("\n Enter the set of intermediate code (terminated by exit):\n");
+    printf("\n Enter intermediate code:\n");
     do
     {
         scanf("%s", icode[i]);
     } while (strcmp(icode[i++], "exit") != 0);
     printf("\n target code generation");
-    printf("\n************************");
     i = 0;
     do
     {
-        strcpy(str, icode[i]);
-        switch (str[3])
+        strcpy(s, icode[i]);
+        switch (s[3])
         {
         case '+':
-            strcpy(opr, "ADD ");
+            strcpy(o, "ADD ");
             break;
         case '-':
-            strcpy(opr, "SUB ");
+            strcpy(o, "SUB ");
             break;
         case '*':
-            strcpy(opr, "MUL ");
+            strcpy(o, "MUL ");
             break;
         case '/':
-            strcpy(opr, "DIV ");
+            strcpy(o, "DIV ");
             break;
         }
-        printf("\n\tMov %c,R%d", str[2], i);
-        printf("\n\t%s%c,R%d", opr, str[4], i);
-        printf("\n\tMov R%d,%c", i, str[0]);
+        printf("\n\tMov %c,R%d", s[2], i);
+        printf("\n\t%s%c,R%d", o, s[4], i);
+        printf("\n\tMov R%d,%c", i, s[0]);
     } while (strcmp(icode[++i], "exit") != 0);
     // getch();
 }
