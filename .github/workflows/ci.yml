@@ -1,0 +1,62 @@
+name: CI Pipeline
+
+# Trigger the workflow on push events to the main branch and pull requests targeting the main branch.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Define environment variables for the workflow
+env:
+  PYTHON_VERSION: '3.10'
+  REPO_NAME: 'Academic-Python-Lab-Solutions-Toolkit'
+  OWNER_NAME: 'chirag127'
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for accurate blame/coverage analysis
+
+      # Step 2: Set up Python environment
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'uv'
+
+      # Step 3: Install dependencies using uv
+      - name: Install dependencies with uv
+        run: |
+          python -m uv pip install --system --upgrade pip
+          python -m uv pip install --system --all-extras # Installs all extras, including dev dependencies
+
+      # Step 4: Lint and format code with Ruff
+      - name: Lint and format with Ruff
+        run: |
+          python -m uv exec ruff format --check .
+          python -m uv exec ruff check .
+
+      # Step 5: Run tests with Pytest
+      - name: Run tests with Pytest
+        run: |
+          python -m uv exec pytest --cov=${{ env.REPO_NAME }} --cov-report=xml
+        # The --cov=${{ env.REPO_NAME }} flag enables coverage collection for the package itself.
+        # The --cov-report=xml generates a coverage report in XML format, suitable for Codecov.
+
+      # Step 6: Upload coverage report to Codecov
+      # This step assumes you have a CODECOV_TOKEN set in your GitHub repository secrets.
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/pull/${{ github.event.number }}/merge'
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # This token is required for uploading coverage reports to Codecov.
+          # It should be configured as a secret in your GitHub repository settings.
