@@ -1,38 +1,40 @@
-# Python Artifacts & Environments
-.venv/
+# Python
 __pycache__/
-*.py[cod]
-*.so
-*.egg-info/
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.coverage
+*.pyc
+*.pyo
+*.pyd
 
-# Editor/IDE Specific
-.idea/
+# Virtual environment
+venv/
+venv_backup/
+env/
+.venv/
+
+# IDE / Editor specific files
 .vscode/
+.idea/
 *.swp
+*.swo
 
-# Virtual Environment Manager Cache (uv)
-/venv/
+# Testing and Coverage
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Build/Distribution
-dist/
+# Build artifacts
 build/
-*.egg
+dist/
+*.egg-info/
 
-# Jupyter Notebooks
-.ipynb_checkpoints
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
-# Logs and Runtime Data
-*.log
-/data/
-
-# Secrets and Credentials (NEVER COMMIT)
-.env
-secrets.json
-
-# Operating System Files
+# OS generated files
 .DS_Store
 Thumbs.db
+
+# Ruff cache
+.ruff_cache/
+
+# uv cache
+.uv/
