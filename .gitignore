@@ -1,40 +1,62 @@
-# Python
+# Python build artifacts
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Virtual environment
+# Python package and virtual environment directories
 venv/
-venv_backup/
-env/
 .venv/
+env/
+.env/
+.eggs/
+lib/
+lib64/
+parts/
+/site-packages/
+/usr/lib/python3/dist-packages/
+/usr/lib/python4/dist-packages/
 
-# IDE / Editor specific files
-.vscode/
+# IDE and editor configuration files
 .idea/
+.vscode/
+*.iml
 *.swp
-*.swo
+.DS_Store
 
-# Testing and Coverage
+# Build and distribution directories
+build/
+dist/
+*
+*.egg-info/
+*.egg
+
+# Testing and coverage artifacts
 .pytest_cache/
 .coverage
 htmlcov/
-
-# Build artifacts
-build/
-dist/
-*.egg-info/
+cover/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Data files (assuming large data files should not be committed)
+*.csv
+*.tsv
+*.feather
+*.parquet
+*.h5
+*.hdf5
 
-# Ruff cache
+# Log files
+*.log
+
+# Secrets and configuration (should be managed separately)
+.env
+*.env
+secrets.yaml
+config.ini
+
+# Specific to Ruff, uv, and other tools
 .ruff_cache/
-
-# uv cache
 .uv/
