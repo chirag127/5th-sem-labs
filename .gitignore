@@ -1,62 +1,59 @@
-# Python build artifacts
-__pycache__/
+# Python Byte-Code Files
 *.pyc
-*.pyo
-*.pyd
+__pycache__/
 
-# Python package and virtual environment directories
+# Distribution / Packaging
+*.egg-info/
+build/
+dist/
+*.tar.gz
+*.whl
+
+# IDE / Editor specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Virtual Environments
 venv/
 .venv/
 env/
 .env/
-.eggs/
-lib/
-lib64/
-parts/
-/site-packages/
-/usr/lib/python3/dist-packages/
-/usr/lib/python4/dist-packages/
+ENV/
 
-# IDE and editor configuration files
-.idea/
-.vscode/
-*.iml
-*.swp
-.DS_Store
-
-# Build and distribution directories
-build/
-dist/
-*
-*.egg-info/
-*.egg
-
-# Testing and coverage artifacts
+# Testing / Coverage
 .pytest_cache/
 .coverage
 htmlcov/
-cover/
 
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# Data files (assuming large data files should not be committed)
-*.csv
-*.tsv
-*.feather
-*.parquet
-*.h5
-*.hdf5
-
-# Log files
+# Log Files
 *.log
 
-# Secrets and configuration (should be managed separately)
-.env
-*.env
-secrets.yaml
-config.ini
+# OS specific
+.DS_Store
+Thumbs.db
 
-# Specific to Ruff, uv, and other tools
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Ruff Cache
 .ruff_cache/
+
+# uv Cache
 .uv/
+
+# Temporary files
+*.tmp
+
+# Static files for web frameworks (example, not directly applicable here)
+# static_files/
+# media/
+
+# Git specific
+.git/
+.gitignore
+
+# Secrets (though typically managed externally or via env vars)
+# *.env
+# secrets.yaml
